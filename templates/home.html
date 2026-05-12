@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="text-center py-5">
+
+    <h1 class="display-4 fw-bold hero-title">
+        Find Your Dream Job
+    </h1>
+
+    <p class="lead text-muted mt-3">
+        Connect with top companies and discover opportunities that match your skills.
+    </p>
+
+    <div class="mt-4">
+
+    {% if user.is_authenticated %}
+
+        {% if user.userprofile.role == 'candidate' %}
+
+            <a href="{% url 'jobs' %}"
+               class="btn btn-dark btn-lg">
+
+                Browse Jobs
+
+            </a>
+
+        {% elif user.userprofile.role == 'recruiter' %}
+
+            <a href="{% url 'create_job' %}"
+               class="btn btn-dark btn-lg">
+
+                Post a Job
+
+            </a>
+
+        {% endif %}
+
+    {% else %}
+
+        <a href="{% url 'jobs' %}"
+           class="btn btn-dark btn-lg me-2">
+
+            Browse Jobs
+
+        </a>
+
+        <a href="{% url 'register' %}"
+           class="btn btn-outline-dark btn-lg">
+
+            Get Started
+
+        </a>
+
+    {% endif %}
+
+</div>
+
+</section>
+
+<!-- Feature Cards -->
+<section class="mt-5">
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <h3 class="mb-3">
+                        Find Jobs
+                    </h3>
+
+                    <p class="text-muted">
+                        Search thousands of jobs from top companies.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <h3 class="mb-3">
+                        Apply Easily
+                    </h3>
+
+                    <p class="text-muted">
+                        Apply for jobs quickly with your profile and resume.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+
+                <div class="card-body text-center p-4">
+
+                    <h3 class="mb-3">
+                        Hire Talent
+                    </h3>
+
+                    <p class="text-muted">
+                        Recruiters can post jobs and hire the best candidates.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Stats Section -->
+<section class="mt-5 py-5">
+
+    <div class="row g-4 text-center">
+
+        <div class="col-md-4">
+
+            <div class="card p-5 h-100">
+
+                <h2 class="fw-bold">
+                    1000+
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Active Jobs
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card p-5 h-100">
+
+                <h2 class="fw-bold">
+                    500+
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Companies
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card p-5 h-100">
+
+                <h2 class="fw-bold">
+                    10K+
+                </h2>
+
+                <p class="text-muted mb-0">
+                    Candidates
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{% endblock %}

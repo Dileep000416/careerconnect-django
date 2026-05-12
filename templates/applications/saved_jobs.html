@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Saved Jobs
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Saved Jobs
+        </h1>
+
+        <p class="text-muted">
+            Your bookmarked jobs
+        </p>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for saved in saved_jobs %}
+
+           <div
+                class="col-lg-4 col-md-6 saved-job-card"
+                id="saved-job-{{ saved.id }}">
+
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                    <div class="card-body p-4">
+
+                        <span class="badge bg-dark mb-3">
+
+                            {{ saved.job.job_type }}
+
+                        </span>
+
+                        <h4 class="fw-bold">
+
+                            {{ saved.job.title }}
+
+                        </h4>
+
+                        <h6 class="text-muted">
+
+                            {{ saved.job.company_name }}
+
+                        </h6>
+
+                        <p class="mt-3">
+
+                            📍 {{ saved.job.location }}
+
+                        </p>
+
+                        <p>
+
+                            💰 {{ saved.job.salary }}
+
+                        </p>
+
+                        <a href="{% url 'job_detail' saved.job.id %}"
+                           class="btn btn-outline-dark w-100">
+
+                            View Job
+
+                        </a>
+
+                        <button
+                            class="btn btn-danger w-100 mt-2 removeSavedBtn"
+                            data-saved-id="{{ saved.id }}">
+
+                            Remove
+
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+<div class="col-12">
+
+    <div class="card p-5 text-center mx-auto"
+         style="max-width: 700px;">
+
+        <div class="mb-3 fs-1">
+            📂
+        </div>
+
+        <h3 class="fw-bold mb-3">
+            No Saved Jobs Yet
+        </h3>
+
+        <p class="text-muted mb-4">
+            Save jobs you’re interested in and access them quickly anytime.
+        </p>
+
+        <div>
+
+            <a href="{% url 'jobs' %}"
+               class="btn btn-dark px-4 py-2">
+
+                Browse Jobs
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+    </div>
+
+</div>
+<script>
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const removeButtons = document.querySelectorAll(
+            '.removeSavedBtn'
+        );
+
+        removeButtons.forEach(button => {
+
+            button.addEventListener(
+                'click',
+                function () {
+
+                    const savedId = this.dataset.savedId;
+
+                    fetch(`/applications/remove-saved-job/${savedId}/`)
+                        .then(response => {
+
+                            if (response.ok) {
+
+                                const card = document.getElementById(
+                                    `saved-job-${savedId}`
+                                );
+
+                                card.remove();
+                                 showToast(
+                                    'Job Removed ❌',
+                                    'danger'
+                                );
+
+                                setTimeout(() => {
+
+                                    card.remove();
+
+                                }, 500);
+                            }
+
+                        });
+
+                }
+            );
+
+        });
+
+    }
+);
+
+</script>
+
+
+{% endblock %}

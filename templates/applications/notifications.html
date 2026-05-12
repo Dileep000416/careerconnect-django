@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Notifications
+        </h1>
+
+        <p class="text-muted">
+            Stay updated with recent activity
+        </p>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            {% for notification in notifications %}
+
+                <div class="border-bottom pb-4 mb-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <h5 class="fw-semibold mb-2">
+
+                                {{ notification.message }}
+
+                            </h5>
+
+                            <small class="text-muted">
+
+                                {{ notification.created_at }}
+
+                            </small>
+
+                        </div>
+
+                            {% if user.userprofile.role == 'recruiter' and notification.application %}
+
+                                <a href="{% url 'candidate_profile' notification.application.applicant.id %}"
+                                class="btn btn-dark rounded-pill">
+
+                                View Candidate
+
+                                </a>
+
+                            {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h4>
+                        No Notifications Yet
+                    </h4>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

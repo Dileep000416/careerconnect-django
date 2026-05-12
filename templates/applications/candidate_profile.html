@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Candidate Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-5">
+
+            <div class="text-center mb-5">
+
+                {% if profile.profile_image %}
+
+                    <img src="{{ profile.profile_image.url }}"
+                         class="rounded-circle mb-3"
+                         width="140"
+                         height="140">
+
+                {% endif %}
+
+                <h1 class="fw-bold">
+
+                    {{ profile.full_name }}
+
+                </h1>
+
+                <h5 class="text-muted">
+
+                    @{{ candidate.username }}
+
+                </h5>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4 class="fw-bold">
+                    Bio
+                </h4>
+
+                <p>
+                    {{ profile.bio }}
+                </p>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4 class="fw-bold">
+                    Skills
+                </h4>
+
+                <p>
+                    {{ profile.skills }}
+                </p>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4 class="fw-bold">
+                    Education
+                </h4>
+
+                <p>
+                    {{ profile.education }}
+                </p>
+
+            </div>
+
+            <div class="mb-4">
+
+                <h4 class="fw-bold">
+                    Experience
+                </h4>
+
+                <p>
+                    {{ profile.experience }}
+                </p>
+
+            </div>
+
+            {% if profile.resume %}
+
+                <a href="{{ profile.resume.url }}"
+                   class="btn btn-dark"
+                   target="_blank">
+
+                    Download Resume
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

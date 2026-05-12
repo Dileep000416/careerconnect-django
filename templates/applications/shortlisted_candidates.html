@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Shortlisted Candidates
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Shortlisted Candidates
+        </h1>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            {% for application in applications %}
+
+                <div class="border-bottom pb-4 mb-4">
+
+                    <a href="{% url 'candidate_profile' application.applicant.id %}"
+                       class="text-decoration-none">
+
+                        <h4 class="fw-bold">
+
+                            {{ application.applicant.username }}
+
+                        </h4>
+
+                    </a>
+
+                    <p>
+
+                        Applied For:
+                        <strong>
+
+                            {{ application.job.title }}
+
+                        </strong>
+
+                    </p>
+
+                    <span class="badge bg-primary">
+
+                        Shortlisted
+
+                    </span>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h4>
+                        No Shortlisted Candidates
+                    </h4>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

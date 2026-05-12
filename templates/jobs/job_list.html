@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Jobs
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+
+    <div>
+
+        <h1 class="fw-bold">
+            Latest Jobs
+        </h1>
+
+        <p class="text-muted">
+            Explore recent opportunities
+        </p>
+
+        <form method="GET" class="row g-3 mb-5">
+
+    <div class="col-md-5">
+
+        <input
+            type="text"
+            name="search"
+            class="form-control form-control-lg"
+            placeholder="Search jobs, company, location..."
+            value="{{ search_query }}"
+        >
+
+    </div>
+
+    <div class="col-md-4">
+
+        <select
+            name="job_type"
+            class="form-select form-select-lg">
+
+            <option value="">
+                All Job Types
+            </option>
+
+            <option value="full_time"
+                {% if job_type == 'full_time' %}
+                    selected
+                {% endif %}
+            >
+                Full Time
+            </option>
+
+            <option value="part_time"
+                {% if job_type == 'part_time' %}
+                    selected
+                {% endif %}
+            >
+                Part Time
+            </option>
+
+            <option value="remote"
+                {% if job_type == 'remote' %}
+                    selected
+                {% endif %}
+            >
+                Remote
+            </option>
+
+            <option value="internship"
+                {% if job_type == 'internship' %}
+                    selected
+                {% endif %}
+            >
+                Internship
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <button
+            type="submit"
+            class="btn btn-dark btn-lg w-100 mt-3">
+
+            Search
+
+        </button>
+
+    </div>
+
+</form>
+
+    </div>
+
+   {% if user.is_authenticated %}
+
+    {% if user.userprofile.role == 'recruiter' %}
+
+        <a href="{% url 'create_job' %}"
+           class="btn btn-dark">
+
+            Post Job
+
+        </a>
+
+    {% endif %}
+
+{% endif %}
+</div>
+
+<div class="row g-4">
+
+    {% for job in jobs %}
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                <div class="card-body p-4">
+
+                    <div class="mb-3 d-flex gap-2">
+
+                        <span class="badge bg-dark">
+
+                            {{ job.job_type }}
+
+                        </span>
+
+                        <span class="badge bg-secondary">
+
+                            {{ job.experience_level }}
+
+                        </span>
+
+                    </div>
+
+                    <h4 class="fw-bold mb-3">
+
+                        {{ job.title }}
+
+                    </h4>
+
+                    <div class="d-flex align-items-center gap-2 mb-3">
+
+    {% if job.company_logo %}
+
+        <img src="{{ job.company_logo.url }}"
+             alt="Company Logo"
+             width="40"
+             height="40"
+             class="rounded-circle border">
+
+    {% endif %}
+
+    <h6 class="text-muted mb-0">
+        {{ job.company_name }}
+    </h6>
+
+</div>
+
+                    <div class="d-flex justify-content-between mb-4">
+
+                        <p class="mb-0">
+
+                            📍 {{ job.location }}
+
+                        </p>
+
+                        <p class="mb-0">
+
+                            💰 {{ job.salary }}
+
+                        </p>
+
+                    </div>
+
+                    <p class="text-muted">
+
+                        {{ job.description|truncatewords:20 }}
+
+                    </p>
+
+                    <a href="{% url 'job_detail' job.id %}"
+                       class="btn btn-outline-dark w-100">
+
+                       View Details
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <div class="text-center">
+
+            <h4>
+                No Jobs Available
+            </h4>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+
+    <nav>
+
+        <ul class="pagination">
+
+            {% if page_obj.has_previous %}
+
+                <li class="page-item">
+
+                    <a class="page-link"
+                       href="?page={{ page_obj.previous_page_number }}">
+
+                        Previous
+
+                    </a>
+
+                </li>
+
+            {% endif %}
+
+            <li class="page-item active">
+
+                <span class="page-link">
+
+                    {{ page_obj.number }}
+
+                </span>
+
+            </li>
+
+            {% if page_obj.has_next %}
+
+                <li class="page-item">
+
+                    <a class="page-link"
+                       href="?page={{ page_obj.next_page_number }}">
+
+                        Next
+
+                    </a>
+
+                </li>
+
+            {% endif %}
+
+        </ul>
+
+    </nav>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+

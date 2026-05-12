@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+
+                <!-- Banner -->
+                <div class="bg-dark"
+                     style="height: 140px;">
+                </div>
+
+                <div class="card-body p-5">
+
+                    <!-- Profile Image -->
+                    <div class="text-center mt-n5 mb-4">
+
+                        {% if profile.profile_image %}
+
+                            <img src="{{ profile.profile_image.url }}"
+                                 class="rounded-circle shadow"
+                                 width="140"
+                                 height="140"
+                                 style="object-fit: cover; border: 4px solid white;">
+
+                        {% else %}
+
+                            <div class="rounded-circle bg-secondary mx-auto shadow"
+                                 style="width: 140px;
+                                        height: 140px;
+                                        border: 4px solid white;">
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Username -->
+                    <div class="text-center mb-5">
+
+                        <h2 class="fw-bold mb-2">
+                            {{ request.user.username }}
+                        </h2>
+
+                        <p class="text-muted text-capitalize">
+                            {{ profile.role }}
+                        </p>
+
+                    </div>
+
+                    <!-- About -->
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            About
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ profile.bio|default:"No bio added yet." }}
+                        </p>
+
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            Skills
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ profile.skills|default:"No skills added yet." }}
+                        </p>
+
+                    </div>
+
+                    <!-- Education -->
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            Education
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ profile.education|default:"No education details added yet." }}
+                        </p>
+
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            Experience
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ profile.experience|default:"No experience added yet." }}
+                        </p>
+
+                    </div>
+
+                    <!-- Resume -->
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            Resume
+                        </h4>
+
+                        {% if profile.resume %}
+
+                            <a href="{{ profile.resume.url }}"
+                               class="btn btn-outline-dark"
+                               target="_blank">
+
+                                View Resume
+
+                            </a>
+
+                        {% else %}
+
+                            <p class="text-muted">
+                                No resume uploaded yet.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                    <!-- Recruiter Information -->
+                    {% if profile.role == 'recruiter' %}
+
+                    <div class="mb-5">
+
+                        <h4 class="fw-bold mb-3">
+                            Company Information
+                        </h4>
+
+                        <p class="mb-2">
+                            <strong>Company:</strong>
+                            {{ profile.company_name }}
+                        </p>
+
+                        <p class="mb-2">
+                            <strong>Website:</strong>
+                            {{ profile.company_website }}
+                        </p>
+
+                        <p class="text-muted">
+                            {{ profile.company_description }}
+                        </p>
+
+                    </div>
+
+                    {% endif %}
+
+                    <!-- Edit Button -->
+                    <div class="text-center">
+
+                        <a href="{% url 'edit_profile' %}"
+                           class="btn btn-dark px-5 py-2">
+
+                            Edit Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

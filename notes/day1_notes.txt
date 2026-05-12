@@ -1,0 +1,87 @@
+DAY 1 - DJANGO JOB PORTAL
+
+--------------------------------------------------
+
+TOPICS COMPLETED
+
+1. Django Project Setup
+- Created virtual environment
+- Installed Django
+- Created Django project
+
+2. Apps Created
+- accounts
+- jobs
+- applications
+
+3. Project Configuration
+- Templates setup
+- Static files setup
+- Media files setup
+
+4. UI Development
+- Base template
+- Navbar
+- Footer
+- Home page UI
+- Bootstrap integration
+
+5. Authentication System
+- Register
+- Login
+- Logout
+- Dynamic navbar
+
+6. Role-Based Authentication
+- Candidate role
+- Recruiter role
+- UserProfile model
+- OneToOneField relationship
+
+--------------------------------------------------
+
+IMPORTANT CONCEPTS LEARNED
+
+- render()
+- redirect()
+- include()
+- authenticate()
+- login()
+- logout()
+- UserCreationForm
+- OneToOneField
+- Template inheritance
+
+--------------------------------------------------
+
+PROBLEMS FACED
+
+1. Virtual Environment Error
+Fix:
+Recreated virtual environment properly.
+
+2. 404 Error
+Fix:
+Created home view and URL mapping.
+
+3. UserProfile Not Showing
+Fix:
+Created new users after adding role logic.
+
+--------------------------------------------------
+
+CURRENT FEATURES WORKING
+
+✅ Home Page
+✅ Register Page
+✅ Login Page
+✅ Logout System
+✅ Role Selection
+✅ User Profiles
+✅ Admin Panel
+
+--------------------------------------------------
+
+DAY STATUS
+
+Day 1 Completed Successfully

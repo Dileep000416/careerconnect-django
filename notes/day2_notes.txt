@@ -1,0 +1,109 @@
+DAY 2 - DJANGO JOB PORTAL
+
+
+
+--------------------------------------------------
+
+TOPICS COMPLETED
+
+1. Extended UserProfile Model
+- Added profile image
+- Added bio
+- Added skills
+- Added education
+- Added experience
+- Added resume upload
+
+2. Recruiter Fields Added
+- Company name
+- Company website
+- Company description
+
+3. Profile Form System
+- Created ModelForm
+- Bootstrap form styling
+- File upload fields
+
+4. Profile Update System
+- Edit profile page
+- Update existing profile
+- Save profile data
+
+5. Authentication Protection
+- login_required decorator
+- Profile access protection
+
+6. File Upload Handling
+- request.FILES
+- Image uploads
+- Resume uploads
+
+--------------------------------------------------
+
+IMPORTANT CONCEPTS LEARNED
+
+- ModelForm
+- request.FILES
+- instance=profile
+- login_required
+- ImageField
+- FileField
+- File uploads in Django
+- Form widgets
+- Bootstrap form customization
+
+--------------------------------------------------
+
+PROBLEMS FACED
+
+1. Pillow Installation Error
+Cause:
+ImageField requires Pillow package.
+
+Fix:
+Installed Pillow using pip.
+
+2. Broken Virtual Environment
+Cause:
+Project folder renamed after venv creation.
+
+Fix:
+Recreated virtual environment and reinstalled packages.
+
+3. UserProfile DoesNotExist Error
+Cause:
+Old users had no UserProfile records.
+
+Fix:
+Created new users after profile logic was added.
+
+--------------------------------------------------
+
+CURRENT FEATURES WORKING
+
+✅ Register
+✅ Login
+✅ Logout
+✅ Candidate Role
+✅ Recruiter Role
+✅ Profile Edit Page
+✅ Resume Upload
+✅ Profile Image Upload
+✅ Candidate Fields
+✅ Recruiter Fields
+
+--------------------------------------------------
+
+CURRENT PAGES BUILT
+
+- Home Page
+- Register Page
+- Login Page
+- Profile Page
+- Admin Panel
+
+--------------------------------------------------
+
+DAY STATUS
+
+Day 2 Completed Successfully

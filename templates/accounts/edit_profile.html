@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Profile Heading -->
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            My Profile
+        </h1>
+
+        <p class="text-muted">
+            Manage your personal and professional information
+        </p>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm rounded-4">
+
+                <div class="card-body p-5">
+
+                    <form method="POST"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        <!-- Basic Information -->
+                        <div class="mb-5">
+
+                            <h4 class="fw-bold mb-4">
+                                Basic Information
+                            </h4>
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Full Name
+                                </label>
+
+                                {{ form.full_name }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Role
+                                </label>
+
+                                {{ form.role }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Profile Image
+                                </label>
+
+                                {{ form.profile_image }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Bio
+                                </label>
+
+                                {{ form.bio }}
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-5">
+
+                        <!-- Professional Information -->
+                        <div class="mb-5">
+
+                            <h4 class="fw-bold mb-4">
+                                Professional Information
+                            </h4>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Skills
+                                </label>
+
+                                {{ form.skills }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Education
+                                </label>
+
+                                {{ form.education }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Experience
+                                </label>
+
+                                {{ form.experience }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Resume
+                                </label>
+
+                                {{ form.resume }}
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-5">
+
+                        <!-- Company Information -->
+                        <div class="mb-4">
+
+                            <h4 class="fw-bold mb-4">
+                                Company Information
+                            </h4>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Company Name
+                                </label>
+
+                                {{ form.company_name }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Company Website
+                                </label>
+
+                                {{ form.company_website }}
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label fw-semibold">
+                                    Company Description
+                                </label>
+
+                                {{ form.company_description }}
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-5">
+
+                        <!-- Submit Button -->
+                        <div class="text-center">
+
+                            <button type="submit"
+                                    class="btn btn-dark px-5 py-2">
+
+                                Save Profile
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

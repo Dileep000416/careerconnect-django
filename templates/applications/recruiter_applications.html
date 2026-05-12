@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Recruiter Applications
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            Total Applications
+        </h1>
+
+        <p class="text-muted">
+            Manage all candidate applications
+        </p>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            {% for application in applications %}
+
+                <div class="border-bottom pb-4 mb-4">
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <a href="{% url 'candidate_profile' application.applicant.id %}"
+                               class="text-decoration-none">
+
+                                <h4 class="fw-bold">
+
+                                    {{ application.applicant.username }}
+
+                                </h4>
+
+                            </a>
+
+                            <p class="mb-1">
+
+                                Applied For:
+                                <strong>
+
+                                    {{ application.job.title }}
+
+                                </strong>
+
+                            </p>
+
+                            <p class="text-muted mb-1">
+
+                                {{ application.applied_at }}
+
+                            </p>
+
+                            <span class="badge bg-dark">
+
+                                {{ application.status }}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h4>
+                        No Applications Yet
+                    </h4>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

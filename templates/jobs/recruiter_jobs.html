@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Jobs
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="mb-5">
+
+        <h1 class="fw-bold">
+            My Posted Jobs
+        </h1>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for job in jobs %}
+
+            <div class="col-lg-4">
+
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+
+                    <div class="card-body p-4">
+
+                        <h4 class="fw-bold">
+                            {{ job.title }}
+                        </h4>
+
+                        <p class="text-muted">
+                            {{ job.company_name }}
+                        </p>
+
+                        <p>
+                            📍 {{ job.location }}
+                        </p>
+
+                        <p>
+                            💰 {{ job.salary }}
+                        </p>
+                        <p class="fw-semibold text-primary">
+
+                            👥 Applicants:
+                            {{ job.application_set.count }}
+
+                        </p>
+
+                        <div class="d-grid gap-2 mt-4">
+
+                            <a href="{% url 'view_applicants' job.id %}"
+                               class="btn btn-dark">
+
+                                View Applicants
+
+                            </a>
+
+                            <a href="{% url 'edit_job' job.id %}"
+                               class="btn btn-warning">
+
+                                Edit Job
+
+                            </a>
+
+                            <a href="{% url 'delete_job' job.id %}"
+                               class="btn btn-danger">
+
+                                Delete Job
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="text-center">
+
+                <h4>
+                    No Jobs Posted Yet
+                </h4>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
