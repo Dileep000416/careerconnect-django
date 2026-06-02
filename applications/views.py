@@ -25,49 +25,74 @@ from django.contrib import messages
 @login_required
 def apply_job_view(request, job_id):
 
+
     job = get_object_or_404(
         Job,
         id=job_id
     )
 
+    # Only candidates can apply
+
     if request.user.userprofile.role != 'candidate':
+
+        messages.error(
+            request,
+            "Only candidates can apply for jobs."
+        )
 
         return redirect(
             'job_detail',
             id=job.id
         )
 
+    # Check if already applied
+
     already_applied = Application.objects.filter(
         job=job,
         applicant=request.user
     ).exists()
 
-    if not already_applied:
+    if already_applied:
 
-        application = Application.objects.create(
-            job=job,
-            applicant=request.user
+        messages.warning(
+            request,
+            "You have already applied for this job."
         )
 
-        Notification.objects.create(
-
-            user=job.recruiter,
-
-            application=application,
-
-            message=f"{request.user.username} applied for {job.title}"
-
+        return redirect(
+            'job_detail',
+            id=job.id
         )
 
-        messages.success(
-    request,
-    "Application submitted successfully!"
-)
+    # Create application
+
+    application = Application.objects.create(
+        job=job,
+        applicant=request.user
+    )
+
+    # Create notification for recruiter
+
+    Notification.objects.create(
+        user=job.recruiter,
+        application=application,
+        message=f"{request.user.username} applied for {job.title}"
+    )
+
+    # Success message
+
+    messages.success(
+        request,
+        "Application submitted successfully!"
+    )
+
+    # Redirect candidate to dashboard
 
     return redirect(
-        'job_detail',
-        id=job.id
-    )
+    'candidate_dashboard'
+)
+
+
 
 
 @login_required

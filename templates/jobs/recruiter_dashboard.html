@@ -8,284 +8,179 @@ Recruiter Dashboard
 
 <div class="container py-5">
 
-    <!-- Header -->
 
-    <div class="d-flex justify-content-between align-items-center mb-5">
+<!-- Welcome Banner -->
 
-        <div>
+<div class="recruiter-banner mb-5">
 
-            <h1 class="fw-bold">
-                Recruiter Dashboard
-            </h1>
+    <h2 class="fw-bold mb-3">
+        Welcome Back, {{ request.user.username }} 👋
+    </h2>
 
-            <p class="text-muted">
-                Manage your posted jobs
-            </p>
+    <p class="mb-4">
+        Manage jobs, track applicants and hire top talent from one place.
+    </p>
 
-        </div>
+    <a href="{% url 'create_job' %}"
+       class="btn btn-light fw-semibold">
 
-        <a href="{% url 'create_job' %}"
-           class="btn btn-dark rounded-pill">
+        Post New Job
 
-            Post New Job
+    </a>
+
+</div>
+
+<!-- Analytics -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+        <a href="{% url 'recruiter_jobs' %}"
+           class="text-decoration-none text-dark">
+
+            <div class="recruiter-card">
+                <i class="bi bi-briefcase-fill text-primary"></i>
+                <h2>{{ total_jobs }}</h2>
+                <p>Jobs Posted</p>
+            </div>
 
         </a>
-
-    </div>
-
-    <!-- Analytics Cards -->
-
-    <div class="row g-4 mb-5">
-
-        <div class="col-md-4">
-
-            <a href="{% url 'recruiter_jobs' %}"
-               class="text-decoration-none text-dark">
-
-                <div class="card border-0 shadow-sm rounded-4">
-
-                    <div class="card-body p-4 text-center">
-
-                        <h2 class="fw-bold">
-                            {{ total_jobs }}
-                        </h2>
-
-                        <p class="text-muted mb-0">
-                            Total Jobs Posted
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <a href="{% url 'recruiter_applications' %}"
-               class="text-decoration-none text-dark">
-
-                <div class="card border-0 shadow-sm rounded-4">
-
-                    <div class="card-body p-4 text-center">
-
-                        <h2 class="fw-bold">
-                            {{ total_applications }}
-                        </h2>
-
-                        <p class="text-muted mb-0">
-                            Total Applications
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-        <div class="col-md-4">
-
-            <a href="{% url 'shortlisted_candidates' %}"
-               class="text-decoration-none text-dark">
-
-                <div class="card border-0 shadow-sm rounded-4">
-
-                    <div class="card-body p-4 text-center">
-
-                        <h2 class="fw-bold">
-                            {{ shortlisted_count }}
-                        </h2>
-
-                        <p class="text-muted mb-0">
-                            Shortlisted Candidates
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </a>
-
-        </div>
-
-    </div>
-    <div class="row g-4 mb-5">
-
-    <div class="col-md-4">
-
-        <div class="card border-0 shadow-sm rounded-4">
-
-            <div class="card-body p-4 text-center">
-
-                <h2 class="fw-bold text-info">
-                    {{ reviewed_count }}
-                </h2>
-
-                <p class="text-muted mb-0">
-                    Reviewed Applications
-                </p>
-
-            </div>
-
-        </div>
-
     </div>
 
     <div class="col-md-4">
+        <a href="{% url 'recruiter_applications' %}"
+           class="text-decoration-none text-dark">
 
-        <div class="card border-0 shadow-sm rounded-4">
-
-            <div class="card-body p-4 text-center">
-
-                <h2 class="fw-bold text-success">
-                    {{ accepted_count }}
-                </h2>
-
-                <p class="text-muted mb-0">
-                    Accepted Candidates
-                </p>
-
+            <div class="recruiter-card">
+                <i class="bi bi-people-fill text-info"></i>
+                <h2>{{ total_applications }}</h2>
+                <p>Applications</p>
             </div>
 
-        </div>
-
+        </a>
     </div>
 
     <div class="col-md-4">
+        <a href="{% url 'shortlisted_candidates' %}"
+           class="text-decoration-none text-dark">
 
-        <div class="card border-0 shadow-sm rounded-4">
-
-            <div class="card-body p-4 text-center">
-
-                <h2 class="fw-bold text-danger">
-                    {{ rejected_count }}
-                </h2>
-
-                <p class="text-muted mb-0">
-                    Rejected Candidates
-                </p>
-
+            <div class="recruiter-card">
+                <i class="bi bi-star-fill text-warning"></i>
+                <h2>{{ shortlisted_count }}</h2>
+                <p>Shortlisted</p>
             </div>
 
-        </div>
+        </a>
+    </div>
 
+    <div class="col-md-4">
+        <div class="recruiter-card">
+            <i class="bi bi-eye-fill text-info"></i>
+            <h2>{{ reviewed_count }}</h2>
+            <p>Reviewed</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="recruiter-card">
+            <i class="bi bi-check-circle-fill text-success"></i>
+            <h2>{{ accepted_count }}</h2>
+            <p>Accepted</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="recruiter-card">
+            <i class="bi bi-x-circle-fill text-danger"></i>
+            <h2>{{ rejected_count }}</h2>
+            <p>Rejected</p>
+        </div>
     </div>
 
 </div>
 
-    <!-- Recent Applications -->
+<!-- Recent Applications -->
 
-    <div class="card border-0 shadow-sm rounded-4 p-4 mb-5">
+<div class="card border-0 shadow-sm rounded-4 p-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="mb-4">
+
+        <h3 class="fw-bold mb-1">
+            Recent Applications
+        </h3>
+
+        <p class="text-muted mb-0">
+            Latest candidate activity
+        </p>
+
+    </div>
+
+    {% for application in recent_applications %}
+
+    <div class="card recruiter-application border-0 shadow-sm rounded-4 p-4 mb-3">
+
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
 
             <div>
 
-                <h3 class="fw-bold mb-1">
-                    Recent Applications
-                </h3>
+                <h5 class="fw-bold mb-1">
+                    {{ application.applicant.username }}
+                </h5>
 
-                <p class="text-muted mb-0">
-                    Latest candidate activity
+                <p class="text-muted mb-1">
+                    Applied for {{ application.job.title }}
                 </p>
+
+                <small class="text-secondary">
+                    {{ application.applied_at }}
+                </small>
+
+            </div>
+
+            <div>
+
+                {% if application.status == 'applied' %}
+                <span class="badge bg-warning text-dark">Applied</span>
+
+                {% elif application.status == 'reviewed' %}
+                <span class="badge bg-info text-dark">Reviewed</span>
+
+                {% elif application.status == 'shortlisted' %}
+                <span class="badge bg-primary">Shortlisted</span>
+
+                {% elif application.status == 'accepted' %}
+                <span class="badge bg-success">Accepted</span>
+
+                {% elif application.status == 'rejected' %}
+                <span class="badge bg-danger">Rejected</span>
+                {% endif %}
 
             </div>
 
         </div>
 
-        {% for application in recent_applications %}
+    </div>
 
-            <div class="border-bottom pb-3 mb-3">
+    {% empty %}
 
-                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div class="text-center py-5">
 
-                    <div>
+        <i class="bi bi-file-earmark-text display-4 text-primary"></i>
 
-                        <h5 class="fw-bold mb-1">
+        <h5 class="fw-bold mt-3">
+            No Applications Yet
+        </h5>
 
-                            {{ application.applicant.username }}
-
-                        </h5>
-
-                        <p class="text-muted mb-1">
-
-                            Applied for:
-                            {{ application.job.title }}
-
-                        </p>
-
-                        <small class="text-secondary">
-
-                            {{ application.applied_at }}
-
-                        </small>
-
-                    </div>
-
-                    <div>
-
-                        {% if application.status == 'applied' %}
-
-                            <span class="badge bg-warning text-dark">
-                                Applied
-                            </span>
-
-                        {% elif application.status == 'reviewed' %}
-
-                            <span class="badge bg-info text-dark">
-                                Reviewed
-                            </span>
-
-                        {% elif application.status == 'shortlisted' %}
-
-                            <span class="badge bg-primary">
-                                Shortlisted
-                            </span>
-
-                        {% elif application.status == 'accepted' %}
-
-                            <span class="badge bg-success">
-                                Accepted
-                            </span>
-
-                        {% elif application.status == 'rejected' %}
-
-                            <span class="badge bg-danger">
-                                Rejected
-                            </span>
-
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        {% empty %}
-
-            <div class="text-center py-4">
-
-                <h5 class="fw-bold">
-                    No Applications Yet
-                </h5>
-
-                <p class="text-muted mb-0">
-                    Candidate activity will appear here.
-                </p>
-
-            </div>
-
-        {% endfor %}
+        <p class="text-muted">
+            Candidate activity will appear here.
+        </p>
 
     </div>
 
-    
-    </div>
+    {% endfor %}
+
+</div>
+
 
 </div>
 

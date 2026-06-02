@@ -10,12 +10,12 @@ Jobs
 
     <div>
 
-        <h1 class="fw-bold">
-            Latest Jobs
+        <h1 class="display-5 fw-bold">
+            Explore Opportunities
         </h1>
 
-        <p class="text-muted">
-            Explore recent opportunities
+        <p class="text-muted fs-5">
+            Discover jobs from top companies and apply instantly.
         </p>
 
         <form method="GET" class="row g-3 mb-5">
@@ -116,7 +116,7 @@ Jobs
 
         <div class="col-lg-4 col-md-6">
 
-            <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card border-0 shadow-sm h-100 job-card">
 
                 <div class="card-body p-4">
 
@@ -136,7 +136,7 @@ Jobs
 
                     </div>
 
-                    <h4 class="fw-bold mb-3">
+                    <h4 class="job-title mb-3">
 
                         {{ job.title }}
 
@@ -144,15 +144,13 @@ Jobs
 
                     <div class="d-flex align-items-center gap-2 mb-3">
 
-    {% if job.company_logo %}
+   {% if job.company_logo %}
 
-        <img src="{{ job.company_logo.url }}"
-             alt="Company Logo"
-             width="40"
-             height="40"
-             class="rounded-circle border">
+    <img src="{{ job.company_logo.url }}"
+         alt="Company Logo"
+         class="rounded-circle border job-company-logo">
 
-    {% endif %}
+{% endif %}
 
     <h6 class="text-muted mb-0">
         {{ job.company_name }}

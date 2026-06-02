@@ -26,7 +26,7 @@ body {
 /* Hero Section */
 
 .hero-section {
-    padding: 100px 0;
+    padding: 50px 0;
     text-align: center;
 }
 
@@ -163,4 +163,193 @@ footer {
         margin-top: 15px;
     }
 
+}
+
+/* Modern Navbar */
+
+.navbar {
+    background: #111827 !important;
+    padding: 18px 0;
+}
+
+.navbar-brand {
+    font-size: 1.7rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.navbar .nav-link {
+    color: #d1d5db !important;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: white !important;
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 15px;
+}
+
+/* Job Cards */
+
+.job-card {
+    border-radius: 24px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.job-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.08);
+}
+
+.job-company-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+/* Job Detail Page */
+
+.company-logo-large {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.job-overview-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    height: 100%;
+    transition: 0.3s ease;
+}
+
+.job-overview-card:hover {
+    transform: translateY(-5px);
+}
+
+.job-detail-card {
+    border-radius: 25px;
+}
+
+.welcome-banner{
+background: linear-gradient(
+135deg,
+#0f172a 0%,
+#1e3a8a 50%,
+#2563eb 100%
+);
+color:white;
+padding:40px;
+border-radius:24px;
+}
+
+.welcome-banner h2{
+margin-bottom:10px;
+}
+
+.dashboard-card{
+    background:#fff;
+    border-radius:20px;
+    padding:35px 20px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:all .3s ease;
+    height:100%;
+    border:1px solid #eef2f7;
+}
+
+.dashboard-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+.dashboard-card i{
+    font-size:2.5rem;
+    color:#2563eb;
+    margin-bottom:15px;
+}
+
+.dashboard-card h2{
+    font-size:2.5rem;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.dashboard-card p{
+    font-size:1rem;
+    color:#6b7280;
+    margin-bottom:0;
+}
+
+.application-card{
+    transition:.3s;
+    border-left:5px solid #2563eb !important;
+}
+
+.application-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.12)!important;
+}
+
+/* Recruiter Dashboard */
+
+.recruiter-banner{
+background: linear-gradient(
+135deg,
+#0f172a 0%,
+#1e3a8a 50%,
+#2563eb 100%
+);
+color:white;
+padding:40px;
+border-radius:24px;
+}
+
+.recruiter-card{
+background:#fff;
+border-radius:20px;
+padding:35px 20px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+transition:.3s;
+border:1px solid #eef2f7;
+height:100%;
+}
+
+.recruiter-card:hover{
+transform:translateY(-8px);
+box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+.recruiter-card i{
+font-size:2.5rem;
+margin-bottom:15px;
+}
+
+.recruiter-card h2{
+font-size:2.5rem;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.recruiter-application{
+border-left:5px solid #2563eb !important;
+transition:.3s;
+}
+
+.recruiter-application:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 35px rgba(0,0,0,.12)!important;
 }

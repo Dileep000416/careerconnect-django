@@ -8,262 +8,200 @@ Candidate Dashboard
 
 <div class="container py-5">
 
-    <!-- Page Heading -->
-    <div class="mb-5">
 
-        <h1 class="fw-bold">
-            Candidate Dashboard
-        </h1>
+<!-- Welcome Banner -->
+<div class="welcome-banner mb-5">
 
-        <p class="text-muted">
-            Track your applications and saved jobs
-        </p>
+    <h2 class="fw-bold mb-3">
+        Welcome Back, {{ request.user.username }} 👋
+    </h2>
 
-    </div>
+    <p class="mb-3">
+        Track your applications, saved jobs and career progress from one place.
+    </p>
 
-    <div class="row g-4 mb-5">
 
-    <div class="col-md-3">
+    <a href="{% url 'jobs' %}" class="btn btn-light fw-semibold">
+        Browse Jobs
+    </a>
 
-        <div class="card border-0 shadow-sm rounded-4 text-center p-4">
+</div>
 
-            <h1 class="fw-bold text-dark">
-                {{ total_applied }}
-            </h1>
-
-            <p class="text-muted mb-0">
-                Applied Jobs
-            </p>
-
-        </div>
-
-    </div>
+<!-- Stats Cards -->
+<div class="row g-4 mb-5">
 
     <div class="col-md-3">
-
-        <div class="card border-0 shadow-sm rounded-4 text-center p-4">
-
-            <h1 class="fw-bold text-info">
-                {{ reviewed_count }}
-            </h1>
-
-            <p class="text-muted mb-0">
-                Reviewed
-            </p>
-
+        <div class="dashboard-card">
+            <i class="bi bi-briefcase-fill text-primary"></i>
+            <h2>{{ total_applied }}</h2>
+            <p>Applied Jobs</p>
         </div>
-
     </div>
 
     <div class="col-md-3">
-
-        <div class="card border-0 shadow-sm rounded-4 text-center p-4">
-
-            <h1 class="fw-bold text-primary">
-                {{ shortlisted_count }}
-            </h1>
-
-            <p class="text-muted mb-0">
-                Shortlisted
-            </p>
-
+        <div class="dashboard-card">
+            <i class="bi bi-eye-fill text-info"></i>
+            <h2>{{ reviewed_count }}</h2>
+            <p>Reviewed</p>
         </div>
-
     </div>
 
     <div class="col-md-3">
-
-        <div class="card border-0 shadow-sm rounded-4 text-center p-4">
-
-            <h1 class="fw-bold text-success">
-                {{ accepted_count }}
-            </h1>
-
-            <p class="text-muted mb-0">
-                Accepted
-            </p>
-
+        <div class="dashboard-card">
+            <i class="bi bi-star-fill text-warning"></i>
+            <h2>{{ shortlisted_count }}</h2>
+            <p>Shortlisted</p>
         </div>
+    </div>
 
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <i class="bi bi-check-circle-fill text-success"></i>
+            <h2>{{ accepted_count }}</h2>
+            <p>Accepted</p>
+        </div>
     </div>
 
 </div>
 
-    <div class="row g-4">
+<div class="row g-4">
 
-        <!-- Applied Jobs -->
-        <div class="col-lg-6">
+    <!-- Applied Jobs -->
+    <div class="col-lg-6">
 
-            <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
 
-                <h2 class="fw-bold mb-1">
-                    Applied Jobs
-                </h2>
+    <h3 class="fw-bold mb-0">
+        Applied Jobs
+    </h3>
 
-                <p class="text-muted mb-0">
-                    Track your recent applications
-                </p>
+    <span class="text-muted">
+        {{ total_applied }} Application{{ total_applied|pluralize }}
+    </span>
 
-            </div>
+</div>
 
-            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+        {% for application in applied_jobs %}
 
-                {% for application in applied_jobs %}
+        <div class="card application-card border-0 shadow-sm rounded-4 p-4 mb-3">
 
-                    <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-start">
 
-                        <h5 class="fw-bold">
-                            {{ application.job.title }}
-                        </h5>
+                <div>
 
-                        <p class="text-muted mb-1">
-                            {{ application.job.company_name }}
-                        </p>
+                    <h5 class="fw-bold mb-1">
+                        {{ application.job.title }}
+                    </h5>
 
-                        <small class="text-secondary">
-                            Applied on:
-                            {{ application.applied_at }}
-                        </small>
-                        
-                        <div class="mt-2">
+                    <p class="text-muted mb-2">
+                        {{ application.job.company_name }}
+                    </p>
 
-                            {% if application.status == 'applied' %}
+                    <small class="text-secondary">
+                        Applied on {{ application.applied_at }}
+                    </small>
 
-                                <span class="badge bg-warning text-dark">
-                                    Applied
-                                </span>
+                </div>
 
-                            {% elif application.status == 'reviewed' %}
+                <div>
 
-                                <span class="badge bg-info text-dark">
-                                    Reviewed
-                                </span>
+                    {% if application.status == 'applied' %}
+                        <span class="badge bg-warning text-dark">Applied</span>
 
-                            {% elif application.status == 'shortlisted' %}
+                    {% elif application.status == 'reviewed' %}
+                        <span class="badge bg-info text-dark">Reviewed</span>
 
-                                <span class="badge bg-primary">
-                                    Shortlisted
-                                </span>
+                    {% elif application.status == 'shortlisted' %}
+                        <span class="badge bg-primary">Shortlisted</span>
 
-                            {% elif application.status == 'accepted' %}
+                    {% elif application.status == 'accepted' %}
+                        <span class="badge bg-success">Accepted</span>
 
-                                <span class="badge bg-success">
-                                    Accepted
-                                </span>
+                    {% elif application.status == 'rejected' %}
+                        <span class="badge bg-danger">Rejected</span>
+                    {% endif %}
 
-                            {% elif application.status == 'rejected' %}
-
-                                <span class="badge bg-danger">
-                                    Rejected
-                                </span>
-
-                            {% endif %}
-
-                        </div>
-
-
-
-                        {% if not forloop.last %}
-                            <hr>
-                        {% endif %}
-
-                    </div>
-
-                {% empty %}
-
-                    <div class="text-center py-4">
-
-                        <h5 class="fw-bold mb-3">
-                            No Applications Yet
-                        </h5>
-
-                        <p class="text-muted mb-4">
-                            Start applying to jobs and track them here.
-                        </p>
-
-                        <a href="{% url 'jobs' %}"
-                           class="btn btn-dark">
-
-                            Browse Jobs
-
-                        </a>
-
-                    </div>
-
-                {% endfor %}
+                </div>
 
             </div>
 
         </div>
 
-        <!-- Saved Jobs -->
-        <div class="col-lg-6">
+        {% empty %}
 
-            <div class="mb-4">
+        <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
 
-                <h2 class="fw-bold mb-1">
-                    Saved Jobs
-                </h2>
+            <i class="bi bi-briefcase display-4 text-primary"></i>
 
-                <p class="text-muted mb-0">
-                    Jobs you bookmarked for later
-                </p>
+            <h5 class="fw-bold mt-3">
+                No Applications Yet
+            </h5>
 
-            </div>
+            <p class="text-muted">
+                Start applying to jobs and track them here.
+            </p>
 
-            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
-
-                {% for saved in saved_jobs %}
-
-                    <div class="mb-4">
-
-                        <h5 class="fw-bold">
-                            {{ saved.job.title }}
-                        </h5>
-
-                        <p class="text-muted mb-1">
-                            {{ saved.job.company_name }}
-                        </p>
-
-                        <small class="text-secondary">
-                            Saved on:
-                            {{ saved.saved_at }}
-                        </small>
-
-                        {% if not forloop.last %}
-                            <hr>
-                        {% endif %}
-
-                    </div>
-
-                {% empty %}
-
-                    <div class="text-center py-4">
-
-                        <h5 class="fw-bold mb-3">
-                            No Saved Jobs Yet
-                        </h5>
-
-                        <p class="text-muted mb-4">
-                            Save jobs you like and access them quickly later.
-                        </p>
-
-                        <a href="{% url 'jobs' %}"
-                           class="btn btn-dark">
-
-                            Explore Jobs
-
-                        </a>
-
-                    </div>
-
-                {% endfor %}
-
-            </div>
+            <a href="{% url 'jobs' %}" class="btn btn-dark">
+                Browse Jobs
+            </a>
 
         </div>
+
+        {% endfor %}
 
     </div>
+
+    <!-- Saved Jobs -->
+    <div class="col-lg-6">
+
+        <h3 class="fw-bold mb-3">
+            Saved Jobs
+        </h3>
+
+        {% for saved in saved_jobs %}
+
+        <div class="card application-card border-0 shadow-sm rounded-4 p-4 mb-3">
+
+            <h5 class="fw-bold mb-1">
+                {{ saved.job.title }}
+            </h5>
+
+            <p class="text-muted mb-2">
+                {{ saved.job.company_name }}
+            </p>
+
+            <small class="text-secondary">
+                Saved on {{ saved.saved_at }}
+            </small>
+
+        </div>
+
+        {% empty %}
+
+        <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
+
+            <i class="bi bi-bookmark-heart display-4 text-primary"></i>
+
+            <h5 class="fw-bold mt-3">
+                No Saved Jobs Yet
+            </h5>
+
+            <p class="text-muted">
+                Save jobs you like and access them later.
+            </p>
+
+            <a href="{% url 'jobs' %}" class="btn btn-dark">
+                Explore Jobs
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+```
 
 </div>
 
